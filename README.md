@@ -7,7 +7,6 @@ This module ofers various helpers to decorate errors with few lines of code in f
 [![Go Report Card](https://goreportcard.com/badge/ubuntu/decorate)](https://goreportcard.com/report/ubuntu/decorate)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/ubuntu/decorate/blob/main/LICENSE)
 
-
 ## Development
 
 Your help would be very much appreciated! Check out the [CONTRIBUTING](./CONTRIBUTING.md) document to see how you could collaborate.
