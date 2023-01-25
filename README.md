@@ -2,7 +2,7 @@
 
 This module offers various helpers to decorate errors with few lines of code in functions. It was a convenience submodule in some of Ubuntu's and Canonical's projects, so we decided to extract it into its own repository so we can share it with the world.
 
-[![Code quality](https://github.com/ubuntu/decorate/workflows/Test/badge.svg)](https://github.com/ubuntu/decorate/actions/workflows/test.yaml?query=workflow%3Atest)
+[![Code quality](https://github.com/ubuntu/decorate/workflows/QA/badge.svg)](https://github.com/ubuntu/decorate/actions/workflows/qa.yaml?query=workflow%3AQA)
 [![Go Reference](https://pkg.go.dev/badge/github.com/ubuntu/decorate.svg)](https://pkg.go.dev/github.com/ubuntu/decorate)
 [![Go Report Card](https://goreportcard.com/badge/ubuntu/decorate)](https://goreportcard.com/report/ubuntu/decorate)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/ubuntu/decorate/blob/main/LICENSE)
