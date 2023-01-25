@@ -69,7 +69,6 @@ In general, we follow the ["fork-and-pull" Git workflow](https://github.com/susa
 
 You only need Go installed.
 
-
 ### About the testsuite
 
 The project includes a comprehensive testsuite made of unit and integration tests. All the tests must pass with and without the race detector.
