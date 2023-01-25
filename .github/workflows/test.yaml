@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  test-linux:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -21,6 +21,16 @@ jobs:
         with:
           version: latest
           args: --config=.golangci-ci.yaml
+
+  test-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.19
       - name: Test
         shell: bash
         run: |
