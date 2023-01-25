@@ -48,5 +48,5 @@ jobs:
       - name: Test
         shell: powershell
         run: |
-          # -race not supported on Windows
           go test
+          # -race not supported on Windows
