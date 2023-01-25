@@ -1,6 +1,6 @@
 # Decorate
 
-This module ofers various helpers to decorate errors with few lines of code in functions. It was a convenience submodule in some of Ubuntu and Canonical's projects, so we dicided to extract it and create a single repository so we can share it with the world.
+This module offers various helpers to decorate errors with few lines of code in functions. It was a convenience submodule in some of Ubuntu's and Canonical's projects, so we decided to extract it into its own repository so we can share it with the world.
 
 [![Code quality](https://github.com/ubuntu/decorate/workflows/Test/badge.svg)](https://github.com/ubuntu/decorate/actions/workflows/test.yaml?query=workflow%3Atest)
 [![Go Reference](https://pkg.go.dev/badge/github.com/ubuntu/decorate.svg)](https://pkg.go.dev/github.com/ubuntu/decorate)
