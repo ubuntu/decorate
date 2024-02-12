@@ -15,23 +15,33 @@ import (
 
 func TestOnErrorWithNoError(t *testing.T) {
 	t.Parallel()
-	var err error
-	decorate.OnError(&err, "My format with %s as argument", "arg")
+
+	err := func() (err error) {
+		defer decorate.OnError(&err, "My format with %s as argument", "arg")
+		return nil
+	}()
+
 	require.NoError(t, err, "No decoration as no error")
 }
 
 func TestOnErrorWithError(t *testing.T) {
 	t.Parallel()
-	err := errors.New("Some error")
-	decorate.OnError(&err, "My format with %s as argument", "arg")
+
+	err := func() (err error) {
+		defer decorate.OnError(&err, "My format with %s as argument", "arg")
+		return errors.New("Some error")
+	}()
+
 	require.Equal(t, errors.New("My format with arg as argument: Some error").Error(), err.Error(), "Should annotate with error format")
 }
 
 func TestLogOnErrorWithNoError(t *testing.T) {
 	out := captureLogs(t)
 
-	var err error
-	decorate.LogOnError(err)
+	_ = func() (err error) {
+		defer decorate.LogOnError(err)
+		return nil
+	}()
 
 	require.Empty(t, out(), "No error  no log")
 }
@@ -39,8 +49,10 @@ func TestLogOnErrorWithNoError(t *testing.T) {
 func TestLogOnErrorWithError(t *testing.T) {
 	out := captureLogs(t)
 
-	err := errors.New("Some error")
-	decorate.LogOnError(err)
+	err := func() (err error) {
+		defer decorate.LogOnError(err)
+		return errors.New("Some error")
+	}()
 
 	require.Contains(t, out(), err.Error(), "The error should be logged")
 }
@@ -48,8 +60,10 @@ func TestLogOnErrorWithError(t *testing.T) {
 func TestLogOnErrorContextWithNoError(t *testing.T) {
 	out := captureLogs(t)
 
-	var err error
-	decorate.LogOnErrorContext(context.Background(), err)
+	_ = func() (err error) {
+		defer decorate.LogOnErrorContext(context.Background(), err)
+		return nil
+	}
 
 	require.Empty(t, out(), "No error  no log")
 }
@@ -57,8 +71,10 @@ func TestLogOnErrorContextWithNoError(t *testing.T) {
 func TestLogOnErrorContextWithError(t *testing.T) {
 	out := captureLogs(t)
 
-	err := errors.New("Some error")
-	decorate.LogOnErrorContext(context.Background(), err)
+	err := func() (err error) {
+		defer decorate.LogOnErrorContext(context.Background(), err)
+		return errors.New("Some error")
+	}()
 
 	require.Contains(t, out(), err.Error(), "The error should be logged")
 }
@@ -69,7 +85,7 @@ func TestLogFuncOnErrorWithNoError(t *testing.T) {
 	f := func() error { return nil }
 	decorate.LogFuncOnError(f)
 
-	require.Empty(t, out(), "No error  no log")
+	require.Empty(t, out(), "No error no log")
 }
 
 func TestLogFuncOnErrorWithError(t *testing.T) {
