@@ -39,7 +39,7 @@ func TestLogOnErrorWithNoError(t *testing.T) {
 	out := captureLogs(t)
 
 	_ = func() (err error) {
-		defer decorate.LogOnError(err)
+		defer decorate.LogOnError(&err)
 		return nil
 	}()
 
@@ -50,7 +50,7 @@ func TestLogOnErrorWithError(t *testing.T) {
 	out := captureLogs(t)
 
 	err := func() (err error) {
-		defer decorate.LogOnError(err)
+		defer decorate.LogOnError(&err)
 		return errors.New("Some error")
 	}()
 
@@ -61,7 +61,7 @@ func TestLogOnErrorContextWithNoError(t *testing.T) {
 	out := captureLogs(t)
 
 	_ = func() (err error) {
-		defer decorate.LogOnErrorContext(context.Background(), err)
+		defer decorate.LogOnErrorContext(context.Background(), &err)
 		return nil
 	}
 
@@ -72,7 +72,7 @@ func TestLogOnErrorContextWithError(t *testing.T) {
 	out := captureLogs(t)
 
 	err := func() (err error) {
-		defer decorate.LogOnErrorContext(context.Background(), err)
+		defer decorate.LogOnErrorContext(context.Background(), &err)
 		return errors.New("Some error")
 	}()
 
