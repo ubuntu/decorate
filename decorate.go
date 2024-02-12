@@ -17,14 +17,14 @@ func OnError(err *error, format string, args ...interface{}) {
 }
 
 // LogOnError logs only any errors without failing.
-func LogOnError(err error) {
+func LogOnError(err *error) {
 	LogOnErrorContext(context.Background(), err)
 }
 
 // LogOnErrorContext logs any errors without failing. It takes a context.
-func LogOnErrorContext(ctx context.Context, err error) {
-	if err != nil {
-		log.Warning(ctx, err)
+func LogOnErrorContext(ctx context.Context, err *error) {
+	if *err != nil {
+		log.Warning(ctx, *err)
 	}
 }
 
