@@ -24,7 +24,7 @@ func TestOnErrorWithNoError(t *testing.T) {
 	require.NoError(t, err, "No decoration as no error")
 }
 
-func TestOnErrorWithError(t *testing.T) {
+func TestOnErrorWithErrorWithFormat(t *testing.T) {
 	t.Parallel()
 
 	err := func() (err error) {
@@ -33,6 +33,17 @@ func TestOnErrorWithError(t *testing.T) {
 	}()
 
 	require.Equal(t, errors.New("My format with arg as argument: Some error").Error(), err.Error(), "Should annotate with error format")
+}
+
+func TestOnErrorWithErrorWithNoFormat(t *testing.T) {
+	t.Parallel()
+
+	err := func() (err error) {
+		defer decorate.OnError(&err, "My format with no argument")
+		return errors.New("Some error")
+	}()
+
+	require.Equal(t, errors.New("My format with no argument: Some error").Error(), err.Error(), "Should annotate with error format")
 }
 
 func TestLogOnErrorWithNoError(t *testing.T) {
