@@ -10,10 +10,14 @@ import (
 
 // OnError prefixes any error with format/args.
 func OnError(err *error, format string, args ...interface{}) {
-	if *err != nil {
-		s := fmt.Sprintf(format, args...)
-		*err = fmt.Errorf("%s: %w", s, *err)
+	if *err == nil {
+		return
 	}
+
+	if len(args) > 0 {
+		format = fmt.Sprintf(format, args...)
+	}
+	*err = fmt.Errorf("%s: %w", format, *err)
 }
 
 // LogOnError logs only any errors without failing.
